@@ -30,11 +30,16 @@ public abstract class BaseFragment<BD extends ViewDataBinding> extends Fragment 
 
     }
 
-    protected abstract void initView() ;
-
-    protected void initData() {
+    protected void initView() {
 
     }
 
+    protected abstract void initData();
+
     protected abstract int getLayoutId();
+
+    protected void startActivity(Class act, Bundle bundle) {
+        if (getActivity() != null)
+            ((IBaseActivity) getActivity()).goActivity(act, bundle);
+    }
 }

@@ -30,7 +30,7 @@ dependencies {
 //    //recyclerView
     api rootProject.ext.libs.supportRecyclerView
 //    //recyclerView分割线
-//    implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 //    //recyclerViewAdapter
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 //    implementation rootProject.ext.libs.supportGridlayout

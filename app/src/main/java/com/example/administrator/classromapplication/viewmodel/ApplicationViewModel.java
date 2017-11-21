@@ -23,6 +23,24 @@ public class ApplicationViewModel extends BmobObject {
     private boolean hasMultiMedia;
     private String classRoom;
     private String other;
+    private int applicationStatus;
+    private String userId;
+
+    public int getApplicationStatus() {
+        return applicationStatus;
+    }
+
+    public void setApplicationStatus(int applicationStatus) {
+        this.applicationStatus = applicationStatus;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getStartTime() {
         return startTime;
@@ -120,7 +138,7 @@ public class ApplicationViewModel extends BmobObject {
         this.other = other;
     }
 
-    public boolean checkSubmit() {
+    public boolean canSubmit() {
         if (TextUtils.isEmpty(applicaUser)) {
             ToastHelp.showToast("申请人不能为空");
             return false;

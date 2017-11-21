@@ -1,6 +1,5 @@
 package com.example.administrator.classromapplication.view.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.classromapplication.R;
@@ -13,12 +12,16 @@ public class MainActivity extends AbsActivity<ActivityMainBinding> {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         String[] tabs = getResources().getStringArray(R.array.main_tab);
         ViewPagerFragmentAdapter adapter = new ViewPagerFragmentAdapter(getSupportFragmentManager(), tabs, getFragments());
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override
