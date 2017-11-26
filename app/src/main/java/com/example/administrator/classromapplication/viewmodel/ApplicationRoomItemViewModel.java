@@ -2,16 +2,40 @@ package com.example.administrator.classromapplication.viewmodel;
 
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/11/19.
  */
 
-public class ApplicationRoomItemViewModel {
+public class ApplicationRoomItemViewModel implements Serializable {
     private String applicationTime;
     private String applicationUser;
     private String applicationStatus;
     private String useReason;
     private String userId;
+    private String applicationId;
+    private ApplicationViewModel viewModel;
+
+    public ApplicationViewModel getViewModel() {
+        return viewModel;
+    }
+
+    public void setViewModel(ApplicationViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setApplicationStatus(String applicationStatus) {
+        this.applicationStatus = applicationStatus;
+    }
+
+    public String getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
+    }
 
     public String getUserId() {
         return userId;

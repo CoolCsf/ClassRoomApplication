@@ -38,14 +38,14 @@
 
                     <TextView
                         style="@style/contentItem_title"
-                        android:text="申请  人："
+                        android:text="申  请  人:"
                         android:textColor="@color/text_color_important" />
 
-                    <TextView
+                    <EditText
                         style="@style/contentItem_content"
-                        android:text="@{data.applicaUser}"
-                        android:textColor="@color/text_color_common"
-                        tools:text="dsdfsdfsdfsdfsdfsdf d" />
+                        android:hint="请输入申请人姓名"
+                        android:text="@={data.applicaUser}"
+                        android:textColor="@color/text_color_common" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -113,7 +113,10 @@
                         android:textColor="@color/text_color_important" />
 
                     <TextView
+                        android:id="@+id/tv_useDate"
                         style="@style/contentItem_content"
+                        android:layout_width="match_parent"
+                        android:hint="请选择日期"
                         android:text="@{data.useDate}"
                         android:textColor="@color/text_color_common" />
                 </LinearLayout>
@@ -129,7 +132,9 @@
                         android:textColor="@color/text_color_important" />
 
                     <TextView
+                        android:id="@+id/tv_startTime"
                         style="@style/contentItem_content"
+                        android:hint="开始时间"
                         android:text="@{data.startTime}"
                         android:textColor="@color/text_color_common" />
 
@@ -139,7 +144,9 @@
                         android:textColor="@color/text_color_important" />
 
                     <TextView
+                        android:id="@+id/tv_endTime"
                         style="@style/contentItem_content"
+                        android:hint="结束时间"
                         android:text="@{data.endTime}"
                         android:textColor="@color/text_color_common" />
                 </LinearLayout>

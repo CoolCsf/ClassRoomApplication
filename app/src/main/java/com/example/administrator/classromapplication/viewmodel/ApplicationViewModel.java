@@ -1,5 +1,6 @@
 package com.example.administrator.classromapplication.viewmodel;
 
+import android.databinding.Bindable;
 import android.text.TextUtils;
 
 import com.tool.util.ToastHelp;
@@ -25,6 +26,24 @@ public class ApplicationViewModel extends BmobObject {
     private String other;
     private int applicationStatus;
     private String userId;
+    private String finalRoom;
+    private String text;//审核备注
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getFinalRoom() {
+        return finalRoom;
+    }
+
+    public void setFinalRoom(String finalRoom) {
+        this.finalRoom = finalRoom;
+    }
 
     public int getApplicationStatus() {
         return applicationStatus;

@@ -11,15 +11,12 @@ import com.example.administrator.classromapplication.viewmodel.ApplicationRoomIt
  */
 
 public class RoomListItemViewHolder extends BaseViewHolder {
-    private ItemApplicationRcyBinding binding;
 
-    public RoomListItemViewHolder(ItemApplicationRcyBinding binding) {
-        super(binding.getRoot());
-        this.binding = binding;
+    public RoomListItemViewHolder(View view) {
+        super(view);
     }
 
-    public void bind(ApplicationRoomItemViewModel item) {
-        binding.setData(item);
-        binding.executePendingBindings();
+    public ItemApplicationRcyBinding getBinding() {
+        return (ItemApplicationRcyBinding) itemView.getTag(com.tool.R.id.BaseQuickAdapter_databinding_support);
     }
 }
