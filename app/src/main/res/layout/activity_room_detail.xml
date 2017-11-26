@@ -1,8 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_process"
+    <data>
+
+        <import type="com.tool.util.DataUtils" />
+
+        <import type="com.example.administrator.classromapplication.model.ApplicationStatueEmun" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.example.administrator.classromapplication.viewmodel.ApplicationDetailViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/titleBar"
+                layout="@layout/layout_toolbar" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="@{data.applicationUser}"
+                tool:text="申请人 :" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="@{data.applicationTime}"
+                tool:text="申请时间:" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="@{data.useTime}"
+                tool:text="使用时间:" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="@{data.useReason}"
+                tool:text="使用原因:" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="@{data.finalRoom}"
+                tool:text="申请课室" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="审核备注 :"
+                android:visibility="@{DataUtils.checkStrNotNull(data.text)?View.VISIBLE:View.GONE}" />
+
+            <TextView
+                style="@style/contentItem_content"
+                android:text="审核流程 :" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_100"
+                android:layout_marginStart="@dimen/dp_30"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_bar"
+                        android:layout_width="@dimen/dp_2"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@{data.state==ApplicationStatueEmun.PENDING.getStatus()?@color/main_color:@color/text_color_help}" />
+
+                    <ImageView
+                        android:id="@+id/img_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@{data.state==ApplicationStatueEmun.PENDING.getStatus()?@drawable/order_circle_sel:@drawable/order_circle_nor}" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="待审核"
+                        android:textColor="@{data.state==ApplicationStatueEmun.PENDING.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:id="@+id/tv_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="@{data.createTime}"
+                        android:textColor="@{data.state==ApplicationStatueEmun.PENDING.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_100"
+                android:layout_marginStart="@dimen/dp_30"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_2"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@{data.state==ApplicationStatueEmun.UNDERREVIEW.getStatus()?@color/main_color:@color/text_color_help}" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@{data.state==ApplicationStatueEmun.UNDERREVIEW.getStatus()?@drawable/order_circle_sel:@drawable/order_circle_nor}" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="审核中"
+                        android:textColor="@{data.state==ApplicationStatueEmun.UNDERREVIEW.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="@{data.createTime}"
+                        android:textColor="@{data.state==ApplicationStatueEmun.UNDERREVIEW.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_100"
+                android:layout_marginStart="@dimen/dp_30"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_2"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:background="@{data.state==ApplicationStatueEmun.AUDITED.getStatus()?@color/main_color:@color/text_color_help}" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@{data.state==ApplicationStatueEmun.AUDITED.getStatus()?@drawable/order_circle_sel:@drawable/order_circle_nor}" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_25"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已审核"
+                        android:textColor="@{data.state==ApplicationStatueEmun.AUDITED.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="@{data.updateTime}"
+                        android:textColor="@{data.state==ApplicationStatueEmun.AUDITED.getStatus()?@color/main_color:@color/text_color_common}"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </layout>

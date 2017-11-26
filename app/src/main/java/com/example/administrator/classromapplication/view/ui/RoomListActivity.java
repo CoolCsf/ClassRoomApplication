@@ -1,5 +1,6 @@
 package com.example.administrator.classromapplication.view.ui;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -46,10 +47,12 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
 
     @Override
     protected void initListener() {
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("applicationViewModel", mAdapter.getData().get(position).getViewModel());
+                goActivity(ApplicationDetailActivity.class, bundle);
             }
         });
     }
@@ -82,7 +85,9 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
                             itemModel.setApplicationTime(model.getCreatedAt());
                             itemModel.setApplicationStatus(model.getApplicationStatus());
                             itemModel.setUserId(model.getUserId());
+                            itemModel.setApplicationId(model.getObjectId());
                             itemList.add(itemModel);
+                            itemModel.setViewModel(model);
                         }
                         mAdapter.setNewData(itemList);
                     } else {

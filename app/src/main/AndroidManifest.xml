@@ -35,7 +35,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".view.ui.RegisteredActivity" />
         <activity android:name=".view.ui.RoomListActivity" />
-        <activity android:name=".view.ui.ApplicationDetailActivity"></activity>
+        <activity android:name=".view.ui.ApplicationDetailActivity" />
+        <activity android:name=".view.ui.RootMainActivity"></activity>
     </application>
 
 </manifest>

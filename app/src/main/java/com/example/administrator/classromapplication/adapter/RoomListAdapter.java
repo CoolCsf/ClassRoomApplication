@@ -1,6 +1,9 @@
 package com.example.administrator.classromapplication.adapter;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -20,21 +23,18 @@ public class RoomListAdapter extends BaseQuickAdapter<ApplicationRoomItemViewMod
     }
 
     @Override
-    public RoomListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater =
-                LayoutInflater.from(parent.getContext());
-        ItemApplicationRcyBinding itemBinding =
-                ItemApplicationRcyBinding.inflate(layoutInflater, parent, false);
-        return new RoomListItemViewHolder(itemBinding);
-    }
-
-    @Override
-    public void onBindViewHolder(RoomListItemViewHolder holder, int position) {
-        holder.bind(getItem(position));
-    }
-
-    @Override
     protected void convert(RoomListItemViewHolder helper, ApplicationRoomItemViewModel item) {
+        helper.getBinding().setData(item);
+    }
 
+    @Override
+    protected View getItemView(int layoutResId, ViewGroup parent) {
+        ViewDataBinding binding = DataBindingUtil.inflate(mLayoutInflater, layoutResId, parent, false);
+        if (binding == null) {
+            return super.getItemView(layoutResId, parent);
+        }
+        View view = binding.getRoot();
+        view.setTag(R.id.BaseQuickAdapter_databinding_support, binding);
+        return view;
     }
 }
