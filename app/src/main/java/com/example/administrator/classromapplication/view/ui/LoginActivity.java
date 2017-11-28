@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, UserViewMo
             public void done(UserViewModel userViewModel, BmobException e) {
                 if (userViewModel != null) {
                     if (userViewModel.isRoot) {
-
+                        goActivity(RootMainActivity.class, null);
                     } else {
                         goActivity(MainActivity.class, null);
                     }

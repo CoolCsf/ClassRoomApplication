@@ -29,7 +29,9 @@ import cn.bmob.v3.listener.FindListener;
 public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
     private RoomListAdapter mAdapter;
     public static final String ROOM_KEY = "room_key";
+    public static final String ROOT_KEY = "roo_key";
     private int statusKey;
+    private boolean isRoot;
 
     @Override
     protected int getLayoutId() {
@@ -39,6 +41,7 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
     @Override
     protected void initView() {
         statusKey = getIntent().getExtras().getInt(ROOM_KEY, 0);
+        isRoot = getIntent().getExtras().getBoolean(ROOT_KEY, false);
         ((CustomTitleBar) binding.titleBar).setTitle(ApplicationStatueEmun.getState(statusKey) + "列表");
         binding.rvApplicationList.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RoomListAdapter();
@@ -46,30 +49,44 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
     protected void initListener() {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("applicationViewModel", mAdapter.getData().get(position).getViewModel());
-                goActivity(ApplicationDetailActivity.class, bundle);
+                if (!isRoot) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("applicationViewModel", mAdapter.getData().get(position).getViewModel());
+                    goActivity(ApplicationDetailActivity.class, bundle);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("applicationViewModel", mAdapter.getData().get(position).getViewModel());
+                    goActivity(RootApplicationDetailActivity.class, bundle);
+                }
             }
         });
     }
 
     @Override
-    protected void initData() {
+    protected void onResume() {
+        super.onResume();
         queryFromBmob();
     }
 
     private void queryFromBmob() {
         BmobQuery<ApplicationViewModel> query = new BmobQuery<>();
-        query.addWhereEqualTo("userId", BmobUser.getCurrentUser().getObjectId());
-        BmobQuery<ApplicationViewModel> query1 = new BmobQuery<>();
-        query1.addWhereEqualTo("applicationStatus", statusKey);
+        query.addWhereEqualTo("applicationStatus", statusKey);
         List<BmobQuery<ApplicationViewModel>> queries = new ArrayList<>();
+        if (!isRoot) {//如果不是管理员，则查询所有与自己有关的信息，如果是管理员，则查询全部
+            BmobQuery<ApplicationViewModel> query1 = new BmobQuery<>();
+            query1.addWhereEqualTo("userId", BmobUser.getCurrentUser().getObjectId());
+            queries.add(query1);
+        }
         queries.add(query);
-        queries.add(query1);
         BmobQuery<ApplicationViewModel> queryAnd = new BmobQuery<>();
         queryAnd.and(queries);
         queryAnd.findObjects(new FindListener<ApplicationViewModel>() {

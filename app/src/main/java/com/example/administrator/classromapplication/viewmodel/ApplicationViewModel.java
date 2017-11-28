@@ -1,6 +1,5 @@
 package com.example.administrator.classromapplication.viewmodel;
 
-import android.databinding.Bindable;
 import android.text.TextUtils;
 
 import com.tool.util.ToastHelp;
@@ -28,6 +27,15 @@ public class ApplicationViewModel extends BmobObject {
     private String userId;
     private String finalRoom;
     private String text;//审核备注
+    private String refuseReason;//拒绝原因
+
+    public String getRefuseReason() {
+        return refuseReason;
+    }
+
+    public void setRefuseReason(String refuseReason) {
+        this.refuseReason = refuseReason;
+    }
 
     public String getText() {
         return text;

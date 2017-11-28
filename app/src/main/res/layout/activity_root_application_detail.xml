@@ -1,0 +1,247 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.example.administrator.classromapplication.viewmodel.ApplicationViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/titleBar"
+            layout="@layout/layout_toolbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_12">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="申  请  人:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.applicaUser}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="申请单位:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.applicaOffice}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="手机号码:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:inputType="phone"
+                        android:text="@{data.phone}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="参加人数:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.applicaNum}"
+                        android:textColor="@color/text_color_common" />
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="人" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="使用日期"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        android:id="@+id/tv_useDate"
+                        style="@style/contentItem_content"
+                        android:layout_width="match_parent"
+                        android:text="@{data.useDate}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="使用时间"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        android:id="@+id/tv_startTime"
+                        style="@style/contentItem_content"
+                        android:text="@{data.startTime}"
+                        android:textColor="@color/text_color_common" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="至"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        android:id="@+id/tv_endTime"
+                        style="@style/contentItem_content"
+                        android:text="@{data.endTime}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="使用原因:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.useReason}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="安排教室:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.classRoom}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="备        注:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.other}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_inputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_refuseReason"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_300"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/shape_stroke_fillet_gray"
+                        android:gravity="top|start"
+                        android:hint="请输入拒绝原因"
+                        android:padding="@dimen/dp_5"
+                        android:text="@={data.refuseReason}"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/et_finalRoom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dp_10"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:background="@drawable/shape_stroke_fillet_gray"
+                        android:gravity="top|start"
+                        android:hint="请获批的教室"
+                        android:lines="1"
+                        android:text="@={data.finalRoom}"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_refuse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/nonormal_red"
+                        android:text="拒绝" />
+
+                    <Button
+                        android:id="@+id/btn_agree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:background="@color/main_color"
+                        android:text="同意" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -6,6 +6,7 @@
     <color name="color_bg">#EFF0F4</color>
     <color name="orange">#ff5000</color>
     <color name="gray">#b3b3b3</color>
+    <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="sh_history">#333333</color>
     <color name="color_aa333333">#AA333333</color>

@@ -56,6 +56,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
     private void goRoomActivity(int status) {
         Bundle bundle = new Bundle();
         bundle.putInt(RoomListActivity.ROOM_KEY, status);
+        bundle.putBoolean(RoomListActivity.ROOT_KEY, model.getRoot());
         startActivity(RoomListActivity.class, bundle);
     }
 

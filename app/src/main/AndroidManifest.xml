@@ -36,7 +36,8 @@
         <activity android:name=".view.ui.RegisteredActivity" />
         <activity android:name=".view.ui.RoomListActivity" />
         <activity android:name=".view.ui.ApplicationDetailActivity" />
-        <activity android:name=".view.ui.RootMainActivity"></activity>
+        <activity android:name=".view.ui.RootMainActivity" />
+        <activity android:name=".view.ui.RootApplicationDetailActivity"></activity>
     </application>
 
 </manifest>
