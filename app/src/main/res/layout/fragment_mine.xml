@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.example.administrator.classromapplication.viewmodel.UserViewModel" />
@@ -39,7 +41,7 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
-                    android:layout_width="0dp"
+                    android:layout_width="271dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1">
@@ -75,13 +77,13 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/tv_style_mid_size" />
 
-                    <TextView
-                        android:id="@+id/tv_mine_user_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:drawableEnd="@drawable/arrows_write_right" />
+                    <!--<TextView-->
+                        <!--android:id="@+id/tv_mine_user_detail"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentEnd="true"-->
+                        <!--android:layout_centerVertical="true"-->
+                        <!--android:drawableEnd="@drawable/arrows_write_right" />-->
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -94,7 +96,8 @@
         <TextView
             android:id="@+id/tv_underReviewRoom"
             style="@style/mine_item"
-            android:text="审批中课室" />
+            android:text="审批中课室"
+            android:visibility="@{data.isRoot?View.GONE:View.VISIBLE}" />
 
         <TextView
             android:id="@+id/tv_auditedRoom"

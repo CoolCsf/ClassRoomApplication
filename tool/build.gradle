@@ -51,4 +51,6 @@ dependencies {
 //    implementation 'com.commit451:PhotoView:1.2.4'
     api project(':galleryfinal')
     api 'cn.bmob.android:bmob-sdk:3.5.5'
+    //Bmob的消息推送SDK
+    compile 'cn.bmob.android:bmob-push:1.0.1'
 }

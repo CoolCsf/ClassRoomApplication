@@ -16,13 +16,19 @@ import com.tool.util.widget.CustomTitleBar;
 
 public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatActivity implements IBaseActivity {
     protected BD binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
+        beforeInitView();
         initView();
         initListener();
         initData();
+    }
+
+    protected void beforeInitView() {
+
     }
 
     protected abstract int getLayoutId();

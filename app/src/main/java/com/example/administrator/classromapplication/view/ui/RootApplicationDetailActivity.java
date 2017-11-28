@@ -13,6 +13,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class RootApplicationDetailActivity extends BaseActivity<ActivityRootApplicationDetailBinding, ApplicationViewModel> {
+    private ApplicationViewModel mModel;
 
     @Override
     protected int getLayoutId() {
@@ -20,18 +21,26 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
     }
 
     @Override
+    protected void beforeInitView() {
+        super.beforeInitView();
+        mModel = (ApplicationViewModel) getIntent().getSerializableExtra("applicationViewModel");
+        binding.setData(mModel);
+    }
+
+    @Override
     protected void initView() {
         super.initView();
         ((CustomTitleBar) binding.titleBar).setTitle("课室审批");
-        ((CustomTitleBar) binding.titleBar).setRightTitle("审批");
+        if (mModel.getApplicationStatus() != ApplicationStatueEmun.AUDITED.getStatus())
+            ((CustomTitleBar) binding.titleBar).setRightTitle("审批");
         ((CustomTitleBar) binding.titleBar).setRightTitleOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!DataUtils.checkStrNotNull(viewModel.getFinalRoom()) && !DataUtils.checkStrNotNull(viewModel.getRefuseReason())) {
+                if (!DataUtils.checkStrNotNull(mModel.getFinalRoom()) && !DataUtils.checkStrNotNull(mModel.getRefuseReason())) {
                     showToast("请进行审批");
                 } else {
-                    viewModel.setApplicationStatus(ApplicationStatueEmun.AUDITED.getStatus());
-                    viewModel.update(viewModel.getObjectId(), new UpdateListener() {
+                    mModel.setApplicationStatus(ApplicationStatueEmun.AUDITED.getStatus());
+                    mModel.update(mModel.getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
@@ -67,8 +76,6 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
 
     @Override
     protected ApplicationViewModel getViewModel() {
-        ApplicationViewModel viewModel = (ApplicationViewModel) getIntent().getSerializableExtra("applicationViewModel");
-        binding.setData(viewModel);
-        return viewModel;
+        return mModel;
     }
 }

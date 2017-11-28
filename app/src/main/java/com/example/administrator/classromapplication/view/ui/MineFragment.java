@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.administrator.classromapplication.R;
-import com.example.administrator.classromapplication.adapter.RoomListAdapter;
 import com.example.administrator.classromapplication.databinding.FragmentMineBinding;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
@@ -56,7 +55,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
     private void goRoomActivity(int status) {
         Bundle bundle = new Bundle();
         bundle.putInt(RoomListActivity.ROOM_KEY, status);
-        bundle.putBoolean(RoomListActivity.ROOT_KEY, model.getRoot());
+        bundle.putBoolean(RoomListActivity.ROOT_KEY, model.isRoot());
         startActivity(RoomListActivity.class, bundle);
     }
 

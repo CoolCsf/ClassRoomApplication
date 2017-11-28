@@ -2,6 +2,10 @@
 
     <data>
 
+        <import type="com.example.administrator.classromapplication.model.ApplicationStatueEmun" />
+
+        <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.example.administrator.classromapplication.viewmodel.ApplicationViewModel" />
@@ -214,17 +218,19 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:background="@drawable/shape_stroke_fillet_gray"
                         android:gravity="top|start"
-                        android:hint="请获批的教室"
+                        android:hint="请输入获批的教室"
                         android:lines="1"
                         android:text="@={data.finalRoom}"
                         android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="@{data.applicationStatus==ApplicationStatueEmun.AUDITED.getStatus()?View.GONE:View.VISIBLE}">
 
                     <Button
                         android:id="@+id/btn_refuse"

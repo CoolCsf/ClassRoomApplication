@@ -11,7 +11,7 @@ public class UserViewModel extends BmobUser {
     public String userName;
     public String pwd;
 
-    public Boolean getRoot() {
+    public Boolean isRoot() {
         return isRoot;
     }
 
