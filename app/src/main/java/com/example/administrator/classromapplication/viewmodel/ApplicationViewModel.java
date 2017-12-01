@@ -28,6 +28,15 @@ public class ApplicationViewModel extends BmobObject {
     private String finalRoom;
     private String text;//审核备注
     private String refuseReason;//拒绝原因
+    private String installationId;//推送的设备Id
+
+    public String getInstallationId() {
+        return installationId;
+    }
+
+    public void setInstallationId(String installationId) {
+        this.installationId = installationId;
+    }
 
     public String getRefuseReason() {
         return refuseReason;

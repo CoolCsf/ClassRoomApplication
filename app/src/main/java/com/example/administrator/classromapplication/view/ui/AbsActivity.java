@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.administrator.classromapplication.AppContext;
 import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
 
@@ -16,15 +17,23 @@ import com.tool.util.widget.CustomTitleBar;
 
 public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatActivity implements IBaseActivity {
     protected BD binding;
+    private String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppContext.instance.addActivities(this);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         beforeInitView();
         initView();
         initListener();
         initData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppContext.instance.removeActivity(TAG);
     }
 
     protected void beforeInitView() {

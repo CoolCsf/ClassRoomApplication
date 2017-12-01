@@ -62,6 +62,8 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
             @Override
             public void onClick(View v) {
                 binding.etFinalRoom.setVisibility(View.GONE);
+                if (DataUtils.checkStrNotNull(mModel.getFinalRoom()))
+                    mModel.setFinalRoom("");
                 binding.etRefuseReason.setVisibility(View.VISIBLE);
             }
         });
@@ -70,6 +72,8 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
             public void onClick(View v) {
                 binding.etFinalRoom.setVisibility(View.VISIBLE);
                 binding.etRefuseReason.setVisibility(View.GONE);
+                if (DataUtils.checkStrNotNull(mModel.getRefuseReason()))
+                    mModel.setRefuseReason("");
             }
         });
     }

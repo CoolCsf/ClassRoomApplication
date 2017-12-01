@@ -13,10 +13,15 @@ import com.example.administrator.classromapplication.model.ApplicationStatueEmun
 import com.example.administrator.classromapplication.viewmodel.ApplicationViewModel;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
 import com.tool.util.DateUtils;
+import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
 
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.PushListener;
 import cn.bmob.v3.listener.SaveListener;
 
 import static com.tool.util.ToastHelp.showToast;
@@ -47,6 +52,7 @@ public class ApplicationFragment extends BaseFragment<FragmentApplicationBinding
                         public void done(String s, BmobException e) {
                             if (e == null) {
                                 showToast("申请成功");
+                                pushToRoot();
                             } else {
                                 showToast("申请失败" + e.getMessage());
                             }
@@ -71,6 +77,23 @@ public class ApplicationFragment extends BaseFragment<FragmentApplicationBinding
             @Override
             public void onClick(View v) {
                 onTimePicker(binding.tvEndTime, false);
+            }
+        });
+    }
+
+    private void pushToRoot() {
+        BmobPushManager bmobPushManager = new BmobPushManager();
+        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
+        query.addWhereEqualTo("isRoot", true);
+        bmobPushManager.setQuery(query);
+        bmobPushManager.pushMessage("有课室申请啦~!", new PushListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    ToastHelp.showToast("已告知老师审批，请等待");
+                } else {
+                    ToastHelp.showToast("发生错误" + e.getMessage());
+                }
             }
         });
     }
