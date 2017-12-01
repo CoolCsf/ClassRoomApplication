@@ -89,9 +89,11 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
         queries.add(query);
         BmobQuery<ApplicationViewModel> queryAnd = new BmobQuery<>();
         queryAnd.and(queries);
+        showLoading();
         queryAnd.findObjects(new FindListener<ApplicationViewModel>() {
             @Override
             public void done(List<ApplicationViewModel> list, BmobException e) {
+                closeLoading();
                 if (e == null) {
                     if (CollectionUtils.collectionState(list) == CollectionUtils.COLLECTION_UNEMPTY) {
                         List<ApplicationRoomItemViewModel> itemList = new ArrayList<>();

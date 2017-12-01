@@ -3,6 +3,7 @@ package com.example.administrator.classromapplication.view.ui;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.administrator.classromapplication.LoginUtil;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.databinding.ActivityRegisteredBinding;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
@@ -28,22 +29,14 @@ public class RegisteredActivity extends BaseActivity<ActivityRegisteredBinding, 
             public void onClick(View v) {
                 if (checkETNotNull(binding.etUserName, "请输入用户名") && checkETNotNull(binding.etPwd, "请输入密码")
                         && checkETNotNull(binding.etPwdConfirm, "请输入确认密码") && checkPwdConfirm() && checkETNotNull(binding.etName, "请输入您的名字")) {
+                    showLoading();
                     viewModel.setRoot(false);
                     viewModel.signUp(new SaveListener<UserViewModel>() {
                         @Override
                         public void done(UserViewModel o, BmobException e) {
                             if (e == null) {
                                 ToastHelp.showToast("注册成功，开始登录");
-                                BmobUser.loginByAccount(o.getUserName(), o.getPwd(), new LogInListener<Object>() {
-                                    @Override
-                                    public void done(Object o, BmobException e) {
-                                        if (e == null) {
-                                            goActivity(MainActivity.class, null);
-                                        } else {
-                                            ToastHelp.showToast("登录失败" + e.getMessage());
-                                        }
-                                    }
-                                });
+                                LoginUtil.login(o.getUserName(), o.getPwd(), RegisteredActivity.this);
                             } else {
                                 ToastHelp.showToast("注册失败" + e.getMessage());
                             }

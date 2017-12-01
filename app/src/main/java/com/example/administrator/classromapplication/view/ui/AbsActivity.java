@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.administrator.classromapplication.AppContext;
+import com.tool.util.DialogHelper;
 import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
 
@@ -18,6 +19,7 @@ import com.tool.util.widget.CustomTitleBar;
 public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatActivity implements IBaseActivity {
     protected BD binding;
     private String TAG = this.getClass().getSimpleName();
+    private DialogHelper helper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,16 @@ public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatA
         initView();
         initListener();
         initData();
+    }
+
+    public void showLoading() {
+        if (helper == null)
+            helper = new DialogHelper();
+        helper.showLoading(this);
+    }
+
+    public void closeLoading() {
+        helper.hideLoading();
     }
 
     @Override

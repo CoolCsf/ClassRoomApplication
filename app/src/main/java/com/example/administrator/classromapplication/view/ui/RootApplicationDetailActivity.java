@@ -39,10 +39,12 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
                 if (!DataUtils.checkStrNotNull(mModel.getFinalRoom()) && !DataUtils.checkStrNotNull(mModel.getRefuseReason())) {
                     showToast("请进行审批");
                 } else {
+                    showLoading();
                     mModel.setApplicationStatus(ApplicationStatueEmun.AUDITED.getStatus());
                     mModel.update(mModel.getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
+                            closeLoading();
                             if (e == null) {
                                 showToast("审批成功");
                                 finish();

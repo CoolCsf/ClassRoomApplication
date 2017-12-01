@@ -47,13 +47,14 @@ public class ApplicationFragment extends BaseFragment<FragmentApplicationBinding
                 if (model.canSubmit()) {
                     model.setApplicationStatus(ApplicationStatueEmun.PENDING.getStatus());
                     model.setUserId(BmobUser.getCurrentUser().getObjectId());
+                    ((MainActivity) getActivity()).showLoading();
                     model.save(new SaveListener<String>() {
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
-                                showToast("申请成功");
                                 pushToRoot();
                             } else {
+                                ((MainActivity) getActivity()).closeLoading();
                                 showToast("申请失败" + e.getMessage());
                             }
                         }
@@ -86,9 +87,10 @@ public class ApplicationFragment extends BaseFragment<FragmentApplicationBinding
         BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
         query.addWhereEqualTo("isRoot", true);
         bmobPushManager.setQuery(query);
-        bmobPushManager.pushMessage("有课室申请啦~!", new PushListener() {
+        bmobPushManager.pushMessage("有课室申请啦~!请处理!", new PushListener() {
             @Override
             public void done(BmobException e) {
+                ((MainActivity) getActivity()).closeLoading();
                 if (e == null) {
                     ToastHelp.showToast("已告知老师审批，请等待");
                 } else {
