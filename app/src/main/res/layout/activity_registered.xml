@@ -96,7 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:background="@null"
-            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:drawableLeft="@drawable/user"
             android:drawablePadding="@dimen/dp_20"
             android:drawableRight="@drawable/huisequxiao"
