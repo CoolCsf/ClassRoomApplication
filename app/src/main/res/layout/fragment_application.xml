@@ -162,7 +162,7 @@
 
                     <EditText
                         style="@style/contentItem_content"
-                        android:hint="请输入使用原因(10个字内)"
+                        android:hint="请输入使用原因"
                         android:text="@={data.useReason}"
                         android:textColor="@color/text_color_common" />
                 </LinearLayout>

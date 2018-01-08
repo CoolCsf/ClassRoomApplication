@@ -30,7 +30,7 @@
             android:drawablePadding="@dimen/dp_20"
             android:drawableRight="@drawable/huisequxiao"
             android:ems="10"
-            android:hint="请输入用户名"
+            android:hint="请输入账号"
             android:paddingBottom="@dimen/dp_20"
             android:paddingRight="@dimen/dp_10"
             android:paddingTop="@dimen/dp_20"
