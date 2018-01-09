@@ -8,6 +8,15 @@ import cn.bmob.v3.BmobInstallation;
 
 public class Installation extends BmobInstallation {
     private boolean isRoot;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public boolean isRoot() {
         return isRoot;

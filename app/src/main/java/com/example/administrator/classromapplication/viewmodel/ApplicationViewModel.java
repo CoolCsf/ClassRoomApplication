@@ -2,6 +2,7 @@ package com.example.administrator.classromapplication.viewmodel;
 
 import android.text.TextUtils;
 
+import com.tool.util.RegulrlyUtils;
 import com.tool.util.ToastHelp;
 
 import cn.bmob.v3.BmobObject;
@@ -189,6 +190,10 @@ public class ApplicationViewModel extends BmobObject {
         }
         if (TextUtils.isEmpty(phone)) {
             ToastHelp.showToast("手机号码不能为空");
+            return false;
+        }
+        if (!RegulrlyUtils.isCellphone(phone)) {
+            ToastHelp.showToast("手机号码错误");
             return false;
         }
         if (TextUtils.isEmpty(applicaNum)) {

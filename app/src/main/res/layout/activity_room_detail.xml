@@ -52,12 +52,35 @@
             <TextView
                 style="@style/contentItem_content"
                 android:text="@{data.finalRoom}"
-                tool:text="申请课室" />
+                tool:text="最终课室:" />
 
             <TextView
                 style="@style/contentItem_content"
-                android:text="审核备注 :"
+                android:text="   备 注    :"
                 android:visibility="@{DataUtils.checkStrNotNull(data.text)?View.VISIBLE:View.GONE}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/dp_12"
+                android:orientation="horizontal"
+                android:visibility="@{DataUtils.checkStrNotNull(data.refuse)?View.VISIBLE:View.GONE}">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拒绝原因:"
+                    android:textColor="@color/text_color_help"
+                    android:textSize="@dimen/sp_14" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.refuse}"
+                    android:textColor="@color/text_color_help"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
 
             <TextView
                 style="@style/contentItem_content"

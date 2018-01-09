@@ -32,6 +32,7 @@ public class ApplicationDetailActivity extends BaseActivity<ActivityRoomDetailBi
         detailViewModel.setUseTime(viewModel.getUseDate() + " " + viewModel.getStartTime() + "至" + viewModel.getEndTime());
         detailViewModel.setFinalRoom(viewModel.getFinalRoom());
         detailViewModel.setText(viewModel.getText());
+        detailViewModel.setRefuse(viewModel.getRefuseReason());
         binding.setData(detailViewModel);
         return detailViewModel;
     }

@@ -6,6 +6,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.tool.util.DataUtils" />
+
         <variable
             name="data"
             type="com.example.administrator.classromapplication.viewmodel.ApplicationViewModel" />
@@ -166,12 +168,28 @@
 
                     <TextView
                         style="@style/contentItem_title"
-                        android:text="安排教室:"
+                        android:text="期望教室:"
                         android:textColor="@color/text_color_important" />
 
                     <TextView
                         style="@style/contentItem_content"
                         android:text="@{data.classRoom}"
+                        android:textColor="@color/text_color_common" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{DataUtils.checkStrNotNull(data.finalRoom)?View.VISIBLE:View.GONE}">
+
+                    <TextView
+                        style="@style/contentItem_title"
+                        android:text="最终教室:"
+                        android:textColor="@color/text_color_important" />
+
+                    <TextView
+                        style="@style/contentItem_content"
+                        android:text="@{data.finalRoom}"
                         android:textColor="@color/text_color_common" />
                 </LinearLayout>
 

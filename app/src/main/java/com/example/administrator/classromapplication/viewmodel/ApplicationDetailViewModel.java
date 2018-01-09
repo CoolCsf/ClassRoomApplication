@@ -16,9 +16,18 @@ public class ApplicationDetailViewModel {
     private String updateTime;//更新时间，即完成审核时间
     private String finalRoom;
     private String text;//审核备注
+    private String refuse;//拒绝原因
+
+    public String getRefuse() {
+        return refuse;
+    }
+
+    public void setRefuse(String refuse) {
+        this.refuse = refuse;
+    }
 
     public String getText() {
-        return "审核备注 :" + text;
+        return "备注 :" + text;
     }
 
     public void setText(String text) {
@@ -26,7 +35,7 @@ public class ApplicationDetailViewModel {
     }
 
     public String getFinalRoom() {
-        return "审批课室 :" + (DataUtils.checkStrNotNull(finalRoom) ? finalRoom : "无");
+        return "最终课室 :" + (DataUtils.checkStrNotNull(finalRoom) ? finalRoom : "无");
     }
 
     public void setFinalRoom(String finalRoom) {

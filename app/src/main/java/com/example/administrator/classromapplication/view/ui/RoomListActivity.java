@@ -80,6 +80,7 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
     private void queryFromBmob() {
         BmobQuery<ApplicationViewModel> query = new BmobQuery<>();
         query.addWhereEqualTo("applicationStatus", statusKey);
+        query.order("updateAt");
         List<BmobQuery<ApplicationViewModel>> queries = new ArrayList<>();
         if (!isRoot) {//如果不是管理员，则查询所有与自己有关的信息，如果是管理员，则查询全部
             BmobQuery<ApplicationViewModel> query1 = new BmobQuery<>();
@@ -110,6 +111,7 @@ public class RoomListActivity extends AbsActivity<ActivityRoomListBinding> {
                         }
                         mAdapter.setNewData(itemList);
                     } else {
+                        mAdapter.setNewData(new ArrayList<ApplicationRoomItemViewModel>());
                         showToast("查询不到数据");
                     }
                 } else {

@@ -2,14 +2,23 @@ package com.example.administrator.classromapplication.view.ui;
 
 import android.view.View;
 
+import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.databinding.ActivityRootApplicationDetailBinding;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
+import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.viewmodel.ApplicationViewModel;
 import com.tool.util.DataUtils;
+import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
 
+import org.greenrobot.eventbus.EventBus;
+
+import cn.bmob.v3.BmobInstallation;
+import cn.bmob.v3.BmobPushManager;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.PushListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 public class RootApplicationDetailActivity extends BaseActivity<ActivityRootApplicationDetailBinding, ApplicationViewModel> {
@@ -46,13 +55,30 @@ public class RootApplicationDetailActivity extends BaseActivity<ActivityRootAppl
                         public void done(BmobException e) {
                             closeLoading();
                             if (e == null) {
-                                showToast("审批成功");
-                                finish();
+                                pushToStudent();
                             } else {
                                 showToast("审批错误" + e.getMessage());
                             }
                         }
                     });
+                }
+            }
+        });
+    }
+
+    private void pushToStudent() {
+        BmobPushManager bmobPushManager = new BmobPushManager();
+        BmobQuery<BmobInstallation> query = BmobInstallation.getQuery();
+        query.addWhereEqualTo("userId", mModel.getUserId());
+        bmobPushManager.setQuery(query);
+        bmobPushManager.pushMessage("教室审批回馈", new PushListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e == null) {
+                    showToast("审批成功");
+                    finish();
+                } else {
+                    ToastHelp.showToast("发生错误" + e.getMessage());
                 }
             }
         });

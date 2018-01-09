@@ -11,17 +11,22 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
+import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.view.ui.RoomListActivity;
 import com.example.administrator.classromapplication.view.ui.RootApplicationDetailActivity;
 import com.example.administrator.classromapplication.view.ui.RootMainActivity;
+import com.example.administrator.classromapplication.viewmodel.UserViewModel;
 import com.tool.util.ToastHelp;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.bmob.push.PushConstants;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by Administrator on 2017/11/29.
@@ -43,8 +48,12 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification.Builder builder = new Notification.Builder(context);
                 Bundle bundle = new Bundle();
-                bundle.putInt(RoomListActivity.ROOM_KEY, ApplicationStatueEmun.PENDING.getStatus());
-                bundle.putBoolean(RoomListActivity.ROOT_KEY, true);
+                Boolean isRoot = BmobUser.getCurrentUser(UserViewModel.class).isRoot;
+                if (isRoot)
+                    bundle.putInt(RoomListActivity.ROOM_KEY, ApplicationStatueEmun.PENDING.getStatus());
+                else
+                    bundle.putInt(RoomListActivity.ROOM_KEY, ApplicationStatueEmun.AUDITED.getStatus());
+                bundle.putBoolean(RoomListActivity.ROOT_KEY, isRoot);
                 Intent intentActivity = new Intent(context, RoomListActivity.class);
                 intentActivity.putExtras(bundle);
                 PendingIntent contentIndent = PendingIntent.getActivity(context, 0, intentActivity, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -57,6 +66,7 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
                 Notification notification = builder.build();
                 //加i是为了显示多条Notification
                 notificationManager.notify(count, notification);
+                EventBus.getDefault().post(new UpdateBadgeNum());
             } catch (Exception e) {
                 e.printStackTrace();
                 ToastHelp.showToast(e.getMessage());

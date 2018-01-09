@@ -7,14 +7,18 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.databinding.FragmentApplicationBinding;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
+import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.viewmodel.ApplicationViewModel;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
 import com.tool.util.DateUtils;
 import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobPushManager;
@@ -52,6 +56,7 @@ public class ApplicationFragment extends BaseFragment<FragmentApplicationBinding
                         @Override
                         public void done(String s, BmobException e) {
                             if (e == null) {
+                                EventBus.getDefault().post(new UpdateBadgeNum());
                                 pushToRoot();
                             } else {
                                 ((MainActivity) getActivity()).closeLoading();

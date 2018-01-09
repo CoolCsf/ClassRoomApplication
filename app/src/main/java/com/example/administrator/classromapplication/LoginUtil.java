@@ -32,7 +32,7 @@ public class LoginUtil {
             @Override
             public void done(UserViewModel userViewModel, BmobException e) {
                 if (userViewModel != null) {
-                    modifyInstallation(userViewModel.isRoot, activity);
+                    modifyInstallation(userViewModel.isRoot, activity, userViewModel.getObjectId());
                 } else {
                     ToastHelp.showToast("登录失败" + e.toString());
                     activity.closeLoading();
@@ -41,7 +41,7 @@ public class LoginUtil {
         });
     }
 
-    private static void modifyInstallation(final Boolean isRoot, final AbsActivity absActivity) {
+    private static void modifyInstallation(final Boolean isRoot, final AbsActivity absActivity, final String userId) {
         BmobQuery<Installation> bmobQuery = new BmobQuery<>();
         final String id = BmobInstallationManager.getInstallationId();
         bmobQuery.addWhereEqualTo("installationId", id);
@@ -51,6 +51,7 @@ public class LoginUtil {
                 if (CollectionUtils.collectionState(list) == CollectionUtils.COLLECTION_UNEMPTY) {
                     Installation installation = list.get(0);
                     installation.setRoot(isRoot);
+                    installation.setUserId(userId);
                     installation.update(new UpdateListener() {
                         @Override
                         public void done(BmobException e) {

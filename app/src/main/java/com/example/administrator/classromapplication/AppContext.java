@@ -22,6 +22,10 @@ import cn.bmob.v3.exception.BmobException;
 public class AppContext extends Application {
     private Stack<Activity> activities = new Stack<>();
     public static AppContext instance;
+    private int pendNum = 0;
+    private int auditedNum = 0;
+    private int readPendNum = 0;
+    private int readAuditendNum = 0;
 
     @Override
     public void onCreate() {
@@ -72,6 +76,32 @@ public class AppContext extends Application {
                 break;
             }
         }
+    }
+
+    public int getPendNum() {
+        return pendNum;
+    }
+
+    public void setPendNum(int pendNum) {
+        this.pendNum = pendNum - readPendNum;
+    }
+
+    public void setPendNumZero() {
+        this.readPendNum += pendNum;
+        this.pendNum = 0;
+    }
+
+    public int getAuditedNum() {
+        return auditedNum;
+    }
+
+    public void setAuditedNum(int auditedNum) {
+        this.auditedNum = auditedNum - readAuditendNum;
+    }
+
+    public void setAuditedNumZero() {
+        this.readAuditendNum += auditedNum;
+        this.auditedNum = 0;
     }
 
     public void addActivities(Activity activity) {

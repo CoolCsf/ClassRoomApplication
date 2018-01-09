@@ -4,10 +4,15 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 
 import com.example.administrator.classromapplication.AppContext;
+import com.example.administrator.classromapplication.AppContextT;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.adapter.ViewPagerFragmentAdapter;
 import com.example.administrator.classromapplication.databinding.ActivityMainBinding;
+import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.tool.util.ToastHelp;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -22,6 +27,7 @@ public class MainActivity extends AbsActivity<ActivityMainBinding> {
         binding.viewPager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.viewPager);
     }
+
 
     @Override
     protected void initData() {
