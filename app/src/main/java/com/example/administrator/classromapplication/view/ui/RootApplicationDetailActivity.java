@@ -2,17 +2,13 @@ package com.example.administrator.classromapplication.view.ui;
 
 import android.view.View;
 
-import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.databinding.ActivityRootApplicationDetailBinding;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
-import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.viewmodel.ApplicationViewModel;
 import com.tool.util.DataUtils;
 import com.tool.util.ToastHelp;
 import com.tool.util.widget.CustomTitleBar;
-
-import org.greenrobot.eventbus.EventBus;
 
 import cn.bmob.v3.BmobInstallation;
 import cn.bmob.v3.BmobPushManager;

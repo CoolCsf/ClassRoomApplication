@@ -15,13 +15,18 @@ import java.util.*
 /**
  * Created by Ervin on 2018/1/9.
  */
-class AppContextT : Application() {
+class AppContext : Application() {
     private var activitys: Stack<Activity> = Stack()
-    private lateinit var instance: AppContextT
+    private var pendNum = 0
+    private var auditedNum = 0
+    private var readPendNum = 0
+    private var readAuditendNum = 0
 
+    init {
+        instance = this
+    }
     override fun onCreate() {
         super.onCreate()
-        instance = this
         ToastHelp.init(this)
         Bmob.initialize(this, "fd56c9cd73e94e83752bcda4fc410938")
         BmobInstallationManager.getInstance().initialize(object : InstallationListener<BmobInstallation>() {
@@ -59,11 +64,40 @@ class AppContextT : Application() {
         }
     }
 
-    fun addActivityies(activity: Activity) {
+    fun addActivities(activity: Activity) {
         activitys.push(activity)
     }
 
-    companion object {
-        fun instance(): AppContextT = AppContextT().instance
+    fun getPendNum(): Int {
+        return pendNum
+    }
+
+    fun setPendNum(pendNum: Int) {
+        this.pendNum = pendNum - readPendNum
+    }
+
+    fun setPendNumZero() {
+        this.readPendNum += pendNum
+        this.pendNum = 0
+    }
+
+    fun getAuditedNum(): Int {
+        return auditedNum
+    }
+
+    fun setAuditedNum(auditedNum: Int) {
+        this.auditedNum = auditedNum - readAuditendNum
+    }
+
+    fun setAuditedNumZero() {
+        this.readAuditendNum += auditedNum
+        this.auditedNum = 0
+    }
+
+    companion object context{
+        lateinit var instance: AppContext
+        fun instance(): AppContext {
+            return instance
+        }
     }
 }

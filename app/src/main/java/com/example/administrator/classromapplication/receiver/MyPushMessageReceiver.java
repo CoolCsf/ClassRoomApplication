@@ -9,20 +9,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 
-import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;
 import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.view.ui.RoomListActivity;
-import com.example.administrator.classromapplication.view.ui.RootApplicationDetailActivity;
-import com.example.administrator.classromapplication.view.ui.RootMainActivity;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
 import com.tool.util.ToastHelp;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.bmob.push.PushConstants;
@@ -50,10 +45,10 @@ public class MyPushMessageReceiver extends BroadcastReceiver {
                 Bundle bundle = new Bundle();
                 Boolean isRoot = BmobUser.getCurrentUser(UserViewModel.class).isRoot;
                 if (isRoot)
-                    bundle.putInt(RoomListActivity.ROOM_KEY, ApplicationStatueEmun.PENDING.getStatus());
+                    bundle.putInt(RoomListActivity.Companion.getROOM_KEY(), ApplicationStatueEmun.PENDING.getStatus());
                 else
-                    bundle.putInt(RoomListActivity.ROOM_KEY, ApplicationStatueEmun.AUDITED.getStatus());
-                bundle.putBoolean(RoomListActivity.ROOT_KEY, isRoot);
+                    bundle.putInt(RoomListActivity.Companion.getROOM_KEY(), ApplicationStatueEmun.AUDITED.getStatus());
+                bundle.putBoolean(RoomListActivity.Companion.getROOT_KEY(), isRoot);
                 Intent intentActivity = new Intent(context, RoomListActivity.class);
                 intentActivity.putExtras(bundle);
                 PendingIntent contentIndent = PendingIntent.getActivity(context, 0, intentActivity, PendingIntent.FLAG_UPDATE_CURRENT);

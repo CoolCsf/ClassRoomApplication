@@ -7,7 +7,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.administrator.classromapplication.AppContext;
 import com.example.administrator.classromapplication.R;
 import com.example.administrator.classromapplication.databinding.FragmentApplicationBinding;
 import com.example.administrator.classromapplication.model.ApplicationStatueEmun;

@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.administrator.classromapplication.AppContext;
 import com.tool.util.DialogHelper;
 import com.tool.util.ToastHelp;
-import com.tool.util.widget.CustomTitleBar;
 
 /**
  * Created by Administrator on 2017/11/13.
@@ -24,7 +23,7 @@ public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppContext.instance.addActivities(this);
+        AppContext.context.instance().addActivities(this);
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         beforeInitView();
         initView();
@@ -45,7 +44,7 @@ public abstract class AbsActivity<BD extends ViewDataBinding> extends AppCompatA
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AppContext.instance.removeActivity(TAG);
+        AppContext.context.instance().removeActivity(TAG);
     }
 
     protected void beforeInitView() {

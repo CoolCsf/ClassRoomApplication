@@ -12,7 +12,6 @@ import com.example.administrator.classromapplication.model.ApplicationStatueEmun
 import com.example.administrator.classromapplication.model.event.UpdateBadgeNum;
 import com.example.administrator.classromapplication.viewmodel.ApplicationViewModel;
 import com.example.administrator.classromapplication.viewmodel.UserViewModel;
-import com.tool.util.QBadgeViewUtil;
 import com.tool.util.ToastHelp;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,7 +23,6 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 import q.rorbin.badgeview.QBadgeView;
 
@@ -83,8 +81,8 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
                                 auditedNum++;
                             }
                         }
-                        AppContext.instance.setAuditedNum(auditedNum);
-                        AppContext.instance.setPendNum(pendingNum);
+                        AppContext.context.instance().setAuditedNum(auditedNum);
+                        AppContext.context.instance().setPendNum(pendingNum);
                         setNum();
                     }
                 } else {
@@ -103,7 +101,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
                     .setExactMode(false)     //number is 9999, if true ,show 9999, false show 99+
                     .setShowShadow(false);    //Control shadow
         }
-        pendView.setBadgeNumber(AppContext.instance.getPendNum());
+        pendView.setBadgeNumber(AppContext.context.instance().getPendNum());
         if (auditendView == null) {
             auditendView = new QBadgeView(getActivity());
             auditendView.bindTarget(binding.tvAuditedRoom)
@@ -112,7 +110,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
                     .setExactMode(false)     //number is 9999, if true ,show 9999, false show 99+
                     .setShowShadow(false);    //Control shadow
         }
-        auditendView.setBadgeNumber(AppContext.instance.getAuditedNum());
+        auditendView.setBadgeNumber(AppContext.context.instance().getAuditedNum());
     }
 
     private void setQBadge(QBadgeView qBadgeView, int count, View view) {
@@ -131,7 +129,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
         binding.tvPendingRoom.setOnClickListener(new View.OnClickListener() {//未审核
             @Override
             public void onClick(View v) {
-                AppContext.instance.setPendNumZero();
+                AppContext.context.instance().setPendNumZero();
                 setNum();
                 goRoomActivity(ApplicationStatueEmun.PENDING.getStatus());
             }
@@ -145,7 +143,7 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
         binding.tvAuditedRoom.setOnClickListener(new View.OnClickListener() {//已审批
             @Override
             public void onClick(View v) {
-                AppContext.instance.setAuditedNumZero();
+                AppContext.context.instance().setAuditedNumZero();
                 setNum();
                 goRoomActivity(ApplicationStatueEmun.AUDITED.getStatus());
             }
@@ -154,8 +152,8 @@ public class MineFragment extends BaseFragment<FragmentMineBinding> {
 
     private void goRoomActivity(int status) {
         Bundle bundle = new Bundle();
-        bundle.putInt(RoomListActivity.ROOM_KEY, status);
-        bundle.putBoolean(RoomListActivity.ROOT_KEY, model.isRoot());
+        bundle.putInt(RoomListActivity.Companion.getROOM_KEY(), status);
+        bundle.putBoolean(RoomListActivity.Companion.getROOT_KEY(), model.isRoot());
         startActivity(RoomListActivity.class, bundle);
     }
 

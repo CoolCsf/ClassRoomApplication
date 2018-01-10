@@ -32,7 +32,7 @@ public class RootMainActivity extends AbsActivity<ActivityRootMainBinding> {
                 ToastHelp.showToast("再按一次推出");
                 time = System.currentTimeMillis();
             } else {
-                AppContext.instance.exitApp();
+                AppContext.context.instance().exitApp();
             }
             return true;
         }
