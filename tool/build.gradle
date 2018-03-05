@@ -24,8 +24,6 @@ dependencies {
 //    //gson
 //    implementation rootProject.ext.libs.gson
 //    //glide图片加载
-    api rootProject.ext.libs.glide
-//    //banner
 //    implementation 'com.bigkoo:convenientbanner:2.0.5'
 //    //recyclerView
     api rootProject.ext.libs.supportRecyclerView
@@ -45,11 +43,8 @@ dependencies {
 //    implementation 'com.wang.avi:library:2.1.3'
 //    //BadgeView
     api 'q.rorbin:badgeview:1.1.0'
-//    //glide-transformations:glide样式转换器 https://github.com/wasabeef/glide-transformations
-    api 'jp.wasabeef:glide-transformations:2.0.2'
 //    //图片查看
 //    implementation 'com.commit451:PhotoView:1.2.4'
-    api project(':galleryfinal')
     api 'cn.bmob.android:bmob-sdk:3.5.8'
     //Bmob的消息推送SDK
     api 'cn.bmob.android:bmob-push:1.0.1'
